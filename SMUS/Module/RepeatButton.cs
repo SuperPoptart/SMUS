@@ -9,8 +9,8 @@ namespace SMUS.Module
 
         public RepeatButton()
         {
-            button = new Button(new BatchedSprite(new Vector2f(0,0), Program.AtlasData["repeat"], 4 ));
-            button.sprite.Position = new Vector2f(Program.Window.Size.X - Program.Window.Size.X / 4, button.sprite.AtlasPosition.Width/2);
+            button = new Button(new BatchedSprite(new Vector2f(0, 0), Program.AtlasData["repeat"], 4));
+            button.sprite.Position = new Vector2f(Program.Window.Size.X - Program.Window.Size.X / 4, button.sprite.AtlasPosition.Width / 2 - 5);
             button.sprite.Colour = Config.Colors["buttonsfaded"];
             button.shadowSprite.Position = button.sprite.Position += new Vector2f(0, 1);
 

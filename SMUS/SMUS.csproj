@@ -75,6 +75,7 @@
     <Compile Include="AtlasData.cs" />
     <Compile Include="Audio.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Module\AddSource.cs" />
     <Compile Include="Module\Border.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Module\DragWindow.cs" />

@@ -16,7 +16,7 @@ namespace SMUS
         public static bool IsRunning = true;
         public static RenderWindow Window;
         public static SpriteBatch SpriteBatch;
-        public static AtlasData AtlasData;        
+        public static AtlasData AtlasData;
         public static bool WindowFocused = true;
         public static string AssPath;
 
@@ -35,20 +35,20 @@ namespace SMUS
             };
 
             //Make sure the window can close properly.
-            Window.Closed += (o,e) => Window.Close();
+            Window.Closed += (o, e) => Window.Close();
             Window.Closed += (o, e) => { if (Audio.Engine != null) Audio.Engine.Dispose(); };
             Window.Closed += (o, e) => IsRunning = false;
 
             //Get bin directory.
             var ass = Assembly.GetExecutingAssembly();
             AssPath = Path.GetDirectoryName(ass.Location);
- 
+
             //Initialize Audio
             Audio.StartEngine();
 
             //Config
             Config.PopulateConfig(AssPath + "/Resources/Config/config.xml");
-            
+
             //SpriteBatch/Atlas
             AtlasData = new AtlasData(AssPath + "/Resources/Textures/Atlas");
             SpriteBatch = new SpriteBatch(AtlasData.AtlasTexture);
@@ -69,7 +69,7 @@ namespace SMUS
                 Window.DispatchEvents();
                 if (!WindowFocused)
                     Thread.Sleep(200); //Doesn't need to run as smooth.
-        
+
                 Window.Clear(Config.Colors["background"]);
 
                 if ((Keyboard.IsKeyPressed(Keyboard.Key.LAlt) || Keyboard.IsKeyPressed(Keyboard.Key.RAlt)) &&
@@ -103,6 +103,7 @@ namespace SMUS
             var volumeControl = new VolumeControl();
             var shuffle = new ShuffleButton();
             var repeat = new RepeatButton();
+            var add = new AddSource();
             var spriteBatch = new SpriteBatchMod(SpriteBatch);
             var search = new TextSearch(songList, baseFont);
             var hotkeys = new HotKeys(pBar, songList, volumeControl);
@@ -114,6 +115,7 @@ namespace SMUS
             moduleContainer.AddModule(volumeControl);
             moduleContainer.AddModule(shuffle);
             moduleContainer.AddModule(repeat);
+            moduleContainer.AddModule(add);
             moduleContainer.AddModule(spriteBatch);
             moduleContainer.AddModule(border);
             moduleContainer.AddModule(search);
@@ -124,9 +126,9 @@ namespace SMUS
             songList.SortByArtist();
 
             //Remove duplicates.
-            var duplicates = songList.GroupBy(x => x.Name).Where(x=>x.Count() > 1);
+            var duplicates = songList.GroupBy(x => x.Name).Where(x => x.Count() > 1);
             foreach (Song song in duplicates
-                .SelectMany(duplicate => duplicate.Take(duplicate.Count()-1)))
+                .SelectMany(duplicate => duplicate.Take(duplicate.Count() - 1)))
             {
                 songList.Remove(song);
             }
